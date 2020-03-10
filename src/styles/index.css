@@ -1,0 +1,44 @@
+h1 {
+    color: #3be4fa;
+    text-align: center;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: rgba(11, 19, 43, 1); 
+    font-size: 20px;
+    color: white !important;
+    /* width: 80%; */
+
+}
+
+.boxSizeForm {
+    border-radius: 8px;
+}
+
+.gridRow {
+    display: -moz-inline-grid;
+    display: -ms-inline-grid;
+}
+
+img {
+    width: 27px;
+}
+
+#root {
+    display: grid;
+    /* flex-direction: column;*/
+}
+
+.mineSweeper {
+    margin: 0 auto;
+}
+
+.start {
+    margin: 0 auto;
+    display: grid;
+}
+
+div.MuiInputBase-input {
+    color: white;
+}
