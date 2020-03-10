@@ -17,8 +17,8 @@ export const styleCell = (
     cellSize: number
 ): React.CSSProperties => {
     const cellSizePx: string = cellSize.toString() + 'px';
-    const fontSize: string = size > DFLT_MAX_NBCELLS && window.innerWidth < MIN_WINDOW_SIZE ? (Math.floor((DFLT_PX_FONT_SIZE * parseInt(cellSizePx) / DFLT_SIZE_PX_CELL)).toString() + 'px') : 'inherit';
-    const scaledSize: string = size > DFLT_MAX_NBCELLS && window.innerWidth < MIN_WINDOW_SIZE ? cellSizePx : DFLT_PX_SIZE_CELL_CSS;
+    const fontSize: string = size > DFLT_MAX_NBCELLS || window.innerWidth < MIN_WINDOW_SIZE ? (Math.floor((DFLT_PX_FONT_SIZE * parseInt(cellSizePx) / DFLT_SIZE_PX_CELL)).toString() + 'px') : 'inherit';
+    const scaledSize: string = size > DFLT_MAX_NBCELLS || window.innerWidth < MIN_WINDOW_SIZE ? cellSizePx : DFLT_PX_SIZE_CELL_CSS;
     return {
         width: scaledSize,
         height: scaledSize,
