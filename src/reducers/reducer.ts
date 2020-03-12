@@ -50,6 +50,9 @@ export function reducer(state: IMineSweeperSettings, action: any) {
             if (!newGrid[action.y][action.x].marked && !newGrid[action.y][action.x].visible){
                 newGrid[action.y][action.x].marked = true;
                 newGrid[action.y][action.x].icon = 'peace.svg';
+            } else if (newGrid[action.y][action.x].marked) {
+                newGrid[action.y][action.x].marked = false;
+                newGrid[action.y][action.x].icon = newGrid[action.y][action.x].value == 9 ? 'mine.svg' : ''
             }
             status = getGameState(state, newGrid);
             return {

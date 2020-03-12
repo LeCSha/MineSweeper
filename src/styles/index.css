@@ -7,9 +7,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: rgba(11, 19, 43, 1); 
     font-size: 20px;
-    color: white !important;
-    /* width: 80%; */
-
 }
 
 .boxSizeForm {
@@ -37,8 +34,22 @@ img {
 .start {
     margin: 0 auto;
     display: grid;
+    color: white;
+    width: 50%;
 }
 
-div.MuiInputBase-input {
+div.start .MuiTextField-root .MuiInputBase-root .MuiInputBase-input,
+div.start .MuiTextField-root label {
     color: white;
+}
+
+div.start .MuiTextField-root .MuiInputBase-root .MuiInputBase-input {
+    border-bottom: 1px solid white;
+}
+
+div.start .MuiTextField-root .MuiInputBase-root.MuiInput-underline::after {
+    border-bottom: 1px solid cyan;
+}
+div.start .MuiTextField-root .MuiInputBase-root.MuiInput-underline::before {
+    border-bottom: 1px solid grey;
 }

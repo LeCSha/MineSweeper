@@ -6,6 +6,7 @@ import { IMineSweeperSettings, GameState } from '../types/types';
 import { reducer, initialState } from '../reducers/reducer';
 import { validSettings, gameStatus } from '../actions/actions';
 import '../styles/index.css';
+import Timer from './Timer';
 
 function initState() {
     const newState: IMineSweeperSettings = {
@@ -45,40 +46,55 @@ export default function Main() {
         case GameState.START:
             test = (
                 <div className="start">
-                    <TextField type="number" value={settings.nbMines} onChange={handleNbMinesChange} />
-                    <TextField type="number" className="boxSizeForm" label="Choose size grid" value={settings.size} onChange={handleSizeChange} />
-                    <Button variant="outlined" color="primary" onClick={handleValidationClick}>
+                    <TextField
+                        color="primary"
+                        type="number"
+                        className="boxSizeForm"
+                        label="Pick a size"
+                        size="medium"
+                        value={settings.size}
+                        onChange={handleSizeChange}
+                    />
+                    <TextField
+                        color="primary"
+                        type="number"
+                        label="Pick a number of mines"
+                        value={settings.nbMines}
+                        size="medium"
+                        onChange={handleNbMinesChange}
+                        />
+                    <Button color="inherit" variant="outlined" onClick={handleValidationClick}>
                         Begin
                     </Button>
                 </div>
             )
             break;
         case GameState.INGAME:
+        case GameState.GAME_LOST:
             test = (
                 <>
                     <Button onClick={() => {dispatch(gameStatus(GameState.START))}}>New Game</Button>
                     <Button>Debug</Button>
+                    <Timer/>
                     <MineSweeper dispatch={dispatch} grid={state ? state : initialState} ></MineSweeper>
                 </>
             )
             break;
         case GameState.GAME_WON:
-            test = (
-                <>
-
-                    <MineSweeper dispatch={dispatch} grid={state ? state : initialState} ></MineSweeper>
-                </>
-            )
-            break;
-        case GameState.GAME_LOST:
-            test = (
-                <>
+                test = (
+                    <>
 
                     <MineSweeper dispatch={dispatch} grid={state ? state : initialState} ></MineSweeper>
                 </>
             )
             break;
         case GameState.DEBUG:
+            test = (
+                <>
+
+                    <MineSweeper dispatch={dispatch} grid={state ? state : initialState} ></MineSweeper>
+                </>
+            )
             break;
         default:
             break;
