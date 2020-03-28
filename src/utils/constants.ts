@@ -1,8 +1,8 @@
 
 export const DFLT_MAX_NBCELLS = 45;
-export const DFLT_PX_FONT_SIZE = 16;
-export const DFLT_SIZE_PX_CELL = 20;
-export const DFLT_PX_SIZE_CELL_CSS = '20px';
+export const DFLT_FONT_SIZE = 16;
+export const DFLT_SIZE_CELL = 20;
+export const DFLT_PX_SIZE_CELL = '20px';
 export const MIN_WINDOW_SIZE = 1350;
 export const DFLT_SIZE_IMG_PX = '16px';
 

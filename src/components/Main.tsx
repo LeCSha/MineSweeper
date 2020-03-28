@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { initGrid } from '../utils/algo';
 import { MineSweeper } from './MineSweeper';
+import { ScorePanel } from './ScorePanel';
 import { IMineSweeperSettings, GameState } from '../types/types';
 import { reducer, initialState } from '../reducers/reducer';
 import { validSettings, gameStatus } from '../actions/actions';
@@ -16,18 +17,31 @@ function initState() {
     return newState;
 }
 
+function saveScores(seconds: number){
+    if (seconds > 0) {
+        const scores = localStorage.getItem('times');
+
+        if (scores) {
+            let newScores = scores.split(' ');
+            newScores.push((seconds).toString());
+            localStorage.setItem('times', newScores.join(' '));
+        }
+        else
+            localStorage.setItem('times', (seconds).toString());
+    }
+}
+
 export default function Main() {
     const [ state, dispatch ] = useReducer(reducer, initialState, initState);
     const [ settings, setSettings ] = useState({
         size: '20',
-        nbMines: 20
+        nbMines: '20'
     });
-    const size: number = parseInt(settings.size)
     
     const handleNbMinesChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setSettings({
             ...settings,
-            nbMines: parseInt(event.target.value)
+            nbMines: event.target.value
         })
     };
     const handleSizeChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,8 +51,11 @@ export default function Main() {
         })
     };
     const handleValidationClick = () => {
-        if (settings.nbMines < size * size) {
-            dispatch(validSettings(size, settings.nbMines));
+        const size: number = parseInt(settings.size)
+        const nbMines: number = parseInt(settings.nbMines)
+        
+        if (nbMines < size * size) {
+            dispatch(validSettings(size, nbMines));
         }
     }
     let test = (<></>);
@@ -71,16 +88,22 @@ export default function Main() {
             break;
         case GameState.INGAME:
         case GameState.GAME_LOST:
+        case GameState.GAME_WON:
             test = (
                 <>
-                    <Button onClick={() => {dispatch(gameStatus(GameState.START))}}>New Game</Button>
-                    <Button>Debug</Button>
-                    <Timer/>
+                    <Button onClick={() => {
+                        dispatch(gameStatus(GameState.START));
+                    }}>
+                        New Game
+                    </Button>
+                    <Button onClick={() => {}}>Debug</Button>
+                    <Button onClick={handleValidationClick}>Reset</Button>
+                    <Timer readOnly={true} onToggle={state.timer.toggle} onReset={state.timer.reset} dispatchTime={state.status === GameState.GAME_WON ? saveScores : () => {}}/>
                     <MineSweeper dispatch={dispatch} grid={state ? state : initialState} ></MineSweeper>
+                    <ScorePanel/>
                 </>
             )
             break;
-        case GameState.GAME_WON:
                 test = (
                     <>
 

@@ -53,3 +53,13 @@ div.start .MuiTextField-root .MuiInputBase-root.MuiInput-underline::after {
 div.start .MuiTextField-root .MuiInputBase-root.MuiInput-underline::before {
     border-bottom: 1px solid grey;
 }
+
+.scorePanel {
+    max-width: 600px;
+    text-align: center;
+    background-color: #3be4fa;
+}
+
+.scorePanel ol {
+    display: inline-block;
+}

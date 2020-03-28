@@ -9,6 +9,12 @@ export interface IGridCell {
 
 export interface IMineSweeperSettings {
     status: string;
+    timer: {
+        time: number,
+        firstClic: boolean,
+        toggle: boolean,
+        reset: boolean
+    };
     size: number;
     nbMines: number;
     container: Array<Array<IGridCell>>;

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/index.css';
-import { DFLT_MAX_NBCELLS, MIN_WINDOW_SIZE, DFLT_SIZE_IMG_PX } from '../utils/constants';
+import { DFLT_MAX_NBCELLS, MIN_WINDOW_SIZE, DFLT_SIZE_IMG_PX, DFLT_SIZE_CELL } from '../utils/constants';
 import { styleCell, styleContainerCell } from '../styles/MineSweeperCellStyle';
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 export const MineSweeperCell: React.FC<Props> = ({ cell, size, cellScaledSize, onClickLeft, onClickRight }) => {
     const test: React.CSSProperties = Object.assign(styleCell(size, cellScaledSize), styleContainerCell(cell.visible, cell.value));
     const test2: React.CSSProperties = Object.assign(styleCell(size, cellScaledSize), { visibility : cell.visible || cell.marked ? 'visible' : 'hidden' });
-    const imgSize = size > DFLT_MAX_NBCELLS || window.innerWidth < MIN_WINDOW_SIZE ? (cellScaledSize - 4).toString() + 'px' : DFLT_SIZE_IMG_PX;
+    const imgSize = (size > DFLT_MAX_NBCELLS || window.innerWidth < MIN_WINDOW_SIZE) && cellScaledSize <= DFLT_SIZE_CELL ? (cellScaledSize - 4).toString() + 'px' : DFLT_SIZE_IMG_PX;
     return (
         <div
             style={test}
